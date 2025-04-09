@@ -1,0 +1,6 @@
+int main() {
+    int count = 10;
+    if (count >= 0) {
+      count = count + 1;
+    }
+  }
