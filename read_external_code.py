@@ -1,5 +1,12 @@
-def read_external_code(code_string):
-    with open('test.clite', 'r') as fh:
-        for line in fh:
-            code_string += line
-    return code_string
+def read_external_code():
+    byte_list = []
+    try:
+        with open('test.clite', "rb") as f:
+            byte = f.read(1)
+            while byte:
+                byte_list.append(byte[0])
+                byte = f.read(1)
+        return byte_list
+    except FileNotFoundError:
+        print('Erro. Arquivo não encontrado.')
+        return None
