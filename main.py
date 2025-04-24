@@ -8,7 +8,7 @@ if __name__ == "__main__":
     while token.tag != Tag.EOF:
         tokens.append(token)
         token = lexer.scan()
-    tokens.append(token) # Adiciona o token de EOF
+    tokens.append(token) # O útlimo token será EOF (end of file)
 
     for token in tokens:
         print(token)
