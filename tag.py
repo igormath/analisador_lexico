@@ -1,5 +1,5 @@
 class Tag:
-    # Palavras-chave (mantendo como strings para clareza, mas podemos usar ASCII se necessário para comparações internas)
+    # KEYWORDS
     INT = 'INT'
     BOOL = 'BOOL'
     FLOAT = 'FLOAT'
@@ -11,7 +11,7 @@ class Tag:
     TRUE = 'TRUE'
     FALSE = 'FALSE'
 
-    # Símbolos (usando valores ASCII)
+    # TABELA ASCII
     LBRACE = ord('{')  # 123
     RBRACE = ord('}')  # 125
     LPAREN = ord('(')  # 40
@@ -36,7 +36,7 @@ class Tag:
     OP_AND = '&&'
     OP_NOT = ord('!')   # 33
 
-    # Outros (mantendo como strings para identificação de tipo)
+    # Outros 
     ID = 'ID'
     NUM = 'NUM'
     REAL = 'REAL'
