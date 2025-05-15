@@ -36,6 +36,9 @@ class Tag:
     OP_AND = '&&'
     OP_NOT = ord('!')   # 33
 
+    SCOPE_BEGIN = 'SCOPE_BEGIN'
+    SCOPE_END = 'SCOPE_END'
+
     # Outros 
     ID = 'ID'
     NUM = 'NUM'

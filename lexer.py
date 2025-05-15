@@ -99,11 +99,12 @@ class Lexer:
                 self.peek = self.read_char() 
                 return Token(Tag.RPAREN, ')', self.line)
             elif self.peek == Tag.LBRACE:
-                self.peek = self.read_char() 
-                return Token(Tag.LBRACE, '{', self.line)
+                self.peek = self.read_char()
+                return Token(Tag.SCOPE_BEGIN, '{', self.line)
+                # return Token(Tag.LBRACE, '{', self.line)
             elif self.peek == Tag.RBRACE:
                 self.peek = self.read_char() 
-                return Token(Tag.RBRACE, '}', self.line)
+                return Token(Tag.SCOPE_END, '}', self.line)
             elif self.peek == Tag.LBRACKET:
                 self.peek = self.read_char() 
                 return Token(Tag.LBRACKET, '[', self.line)
