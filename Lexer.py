@@ -59,8 +59,8 @@ class Lexer:
                 tag = Tag.ID
                 if lexeme in self.keywords:
                     tag = self.keywords[lexeme]
-                self.peek = self.read_char() # Adicionado
-                return Token(tag, lexeme)
+                self.peek = self.read_char()
+                return Token(tag, lexeme, self.line)
             elif chr(self.peek).isdigit():
                 lexeme_bytes = [self.peek]
                 while True:
@@ -80,111 +80,111 @@ class Lexer:
                             self.peek = self.read_char()
                         else:
                             break
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.REAL, float(bytes(lexeme_bytes).decode('ascii')))
+                    self.peek = self.read_char()
+                    return Token(Tag.REAL, float(bytes(lexeme_bytes).decode('ascii')), self.line)
                 else:
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.NUM, int(lexeme))
+                    self.peek = self.read_char()
+                    return Token(Tag.NUM, int(lexeme), self.line)
             elif self.peek == ord("'"):
                 char_val = self.read_char()
                 if self.read_char() == ord("'"):
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.CHAR, chr(char_val))
+                    self.peek = self.read_char()
+                    return Token(Tag.CHAR, chr(char_val), self.line)
                 else:
                     raise SyntaxError(f"Caractere mal formado na linha {self.line}")
             elif self.peek == Tag.LPAREN:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.LPAREN, '(')
+                self.peek = self.read_char() 
+                return Token(Tag.LPAREN, '(', self.line)
             elif self.peek == Tag.RPAREN:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.RPAREN, ')')
+                self.peek = self.read_char() 
+                return Token(Tag.RPAREN, ')', self.line)
             elif self.peek == Tag.LBRACE:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.LBRACE, '{')
+                self.peek = self.read_char() 
+                return Token(Tag.LBRACE, '{', self.line)
             elif self.peek == Tag.RBRACE:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.RBRACE, '}')
+                self.peek = self.read_char() 
+                return Token(Tag.RBRACE, '}', self.line)
             elif self.peek == Tag.LBRACKET:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.LBRACKET, '[')
+                self.peek = self.read_char() 
+                return Token(Tag.LBRACKET, '[', self.line)
             elif self.peek == Tag.RBRACKET:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.RBRACKET, ']')
+                self.peek = self.read_char() 
+                return Token(Tag.RBRACKET, ']', self.line)
             elif self.peek == Tag.SEMICOLON:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.SEMICOLON, ';')
+                self.peek = self.read_char() 
+                return Token(Tag.SEMICOLON, ';', self.line)
             elif self.peek == Tag.COMMA:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.COMMA, ',')
+                self.peek = self.read_char() 
+                return Token(Tag.COMMA, ',', self.line)
             elif self.peek == Tag.ASSIGN:
                 if self.peek_char() == Tag.ASSIGN:
                     self.read_char()
                     self.read_char()
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.OP_EQ, '==')
+                    self.peek = self.read_char() 
+                    return Token(Tag.OP_EQ, '==', self.line)
                 else:
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.ASSIGN, '=')
+                    self.peek = self.read_char() 
+                    return Token(Tag.ASSIGN, '=', self.line)
             elif self.peek == Tag.OP_NOT:
                 if self.peek_char() == Tag.ASSIGN:
                     self.read_char()
                     self.read_char()
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.OP_NE, '!=')
+                    self.peek = self.read_char() 
+                    return Token(Tag.OP_NE, '!=', self.line)
                 else:
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.OP_NOT, '!')
+                    self.peek = self.read_char() 
+                    return Token(Tag.OP_NOT, '!', self.line)
             elif self.peek == Tag.OP_LT:
                 if self.peek_char() == Tag.ASSIGN:
                     self.read_char()
                     self.read_char()
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.OP_LE, '<=')
+                    self.peek = self.read_char() 
+                    return Token(Tag.OP_LE, '<=', self.line)
                 else:
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.OP_LT, '<')
+                    self.peek = self.read_char() 
+                    return Token(Tag.OP_LT, '<', self.line)
             elif self.peek == Tag.OP_GT:
                 if self.peek_char() == Tag.ASSIGN:
                     self.read_char()
                     self.read_char()
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.OP_GE, '>=')
+                    self.peek = self.read_char() 
+                    return Token(Tag.OP_GE, '>=', self.line)
                 else:
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.OP_GT, '>')
+                    self.peek = self.read_char() 
+                    return Token(Tag.OP_GT, '>', self.line)
             elif self.peek == ord('|'):
                 if self.peek_char() == ord('|'):
                     self.read_char()
                     self.read_char()
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.OP_OR, '||')
+                    self.peek = self.read_char() 
+                    return Token(Tag.OP_OR, '||', self.line)
                 else:
-                    self.peek = self.read_char() # Adicionado
-                    return Token(ord('|'))
+                    self.peek = self.read_char() 
+                    return Token(ord('|'), self.line)
             elif self.peek == ord('&'):
                 if self.peek_char() == ord('&'):
                     self.read_char()
                     self.read_char()
-                    self.peek = self.read_char() # Adicionado
-                    return Token(Tag.OP_AND, '&&')
+                    self.peek = self.read_char() 
+                    return Token(Tag.OP_AND, '&&', self.line)
                 else:
-                    self.peek = self.read_char() # Adicionado
-                    return Token(ord('&'))
+                    self.peek = self.read_char() 
+                    return Token(ord('&'), self.line)
             elif self.peek == Tag.OP_ADD:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.OP_ADD, '+')
+                self.peek = self.read_char() 
+                return Token(Tag.OP_ADD, '+', self.line)
             elif self.peek == Tag.OP_SUB:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.OP_SUB, '-')
+                self.peek = self.read_char() 
+                return Token(Tag.OP_SUB, '-', self.line)
             elif self.peek == Tag.OP_MUL:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.OP_MUL, '*')
+                self.peek = self.read_char() 
+                return Token(Tag.OP_MUL, '*', self.line)
             elif self.peek == Tag.OP_DIV:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.OP_DIV, '/')
+                self.peek = self.read_char() 
+                return Token(Tag.OP_DIV, '/', self.line)
             elif self.peek == Tag.OP_MOD:
-                self.peek = self.read_char() # Adicionado
-                return Token(Tag.OP_MOD, '%')
+                self.peek = self.read_char() 
+                return Token(Tag.OP_MOD, '%', self.line)
             else:
-                self.peek = self.read_char() # Adicionado
+                self.peek = self.read_char() 
                 return Token(self.peek)
