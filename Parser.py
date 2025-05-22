@@ -6,24 +6,23 @@ class Parser:
         self.lookahead = self.lexer.scan()
 
     def match(self, tag):
-        print(f"Matching: Esperado '{tag}', Lookahead atual: '{self.lookahead}'") # Depuração
+        print(f"Esperado '{tag}', Lookahead atual: '{self.lookahead}'")
         if self.lookahead.tag == tag:
-            print(f"  Match bem-sucedido. Lendo próximo token.") # Depuração
             self.lookahead = self.lexer.scan()
-            print(f"  Próximo lookahead: '{self.lookahead}'") # Depuração
+            print(f"  Próximo lookahead: '{self.lookahead}'")
         else:
             raise SyntaxError(f"Esperado '{tag}', encontrado '{self.lookahead}' na linha {self.lexer.line}")
 
     def program(self):
-        print(f"Lookahead inicial no program(): {self.lookahead}") # Depuração
+        print(f"Lookahead inicial no program(): {self.lookahead}")
         self.match(Tag.INT)
-        print(f"Lookahead após match(INT): {self.lookahead}") # Depuração
+        print(f"Lookahead após match(INT): {self.lookahead}")
         self.match(Tag.MAIN)
-        print(f"Lookahead após match(MAIN): {self.lookahead}") # Depuração
+        print(f"Lookahead após match(MAIN): {self.lookahead}")
         self.match(Tag.LPAREN)
-        print(f"Lookahead após match(LPAREN): {self.lookahead}") # Depuração
+        print(f"Lookahead após match(LPAREN): {self.lookahead}")
         self.match(Tag.RPAREN)
-        print(f"Lookahead após match(RPAREN): {self.lookahead}") # Depuração
+        print(f"Lookahead após match(RPAREN): {self.lookahead}")
         self.match(Tag.LBRACE)
         self.declarations()
         self.commands()
@@ -51,7 +50,7 @@ class Parser:
                 self.match(Tag.RBRACKET)
         if self.lookahead.tag == Tag.ASSIGN:
             self.match(Tag.ASSIGN)
-            self.expression() # Ou um método mais específico para o valor inicial
+            self.expression()
         self.match(Tag.SEMICOLON)
 
     def type(self):
