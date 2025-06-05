@@ -16,7 +16,9 @@ class Lexer:
             "else": Tag.ELSE,
             "while": Tag.WHILE,
             "true": Tag.TRUE,
-            "false": Tag.FALSE
+            "false": Tag.FALSE,
+            "do": Tag.DO,
+            "break": Tag.BREAK
         }
         self.byte_list = read_external_code()
         self.current_byte_index = 0

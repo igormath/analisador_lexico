@@ -10,6 +10,8 @@ class Tag:
     WHILE = 'WHILE'
     TRUE = 'TRUE'
     FALSE = 'FALSE'
+    DO = 'DO'
+    BREAK = 'BREAK'
 
     # TABELA ASCII
     LBRACE = ord('{')  # 123
