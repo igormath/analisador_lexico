@@ -23,7 +23,7 @@ class Real(Token):
 
 class Char(Token):
     def __init__(self, value):
-        super().__init__(Tag.CHAR, value)
+        super().__init__(Tag.CHAR_LITERAL, value)
 
 class Bool(Token):
     def __init__(self, value):

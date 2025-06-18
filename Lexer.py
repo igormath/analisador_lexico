@@ -10,7 +10,7 @@ class Lexer:
             "int": Tag.INT,
             "bool": Tag.BOOL,
             "float": Tag.FLOAT,
-            "char": Tag.CHAR,
+            "char": Tag.CHAR_TYPE,
             "main": Tag.MAIN,
             "if": Tag.IF,
             "else": Tag.ELSE,
@@ -91,7 +91,7 @@ class Lexer:
                 char_val = self.read_char()
                 if self.read_char() == ord("'"):
                     self.peek = self.read_char()
-                    return Token(Tag.CHAR, chr(char_val), self.line)
+                    return Token(Tag.CHAR_LITERAL, chr(char_val), self.line)
                 else:
                     raise SyntaxError(f"Caractere mal formado na linha {self.line}")
             elif self.peek == Tag.LPAREN:
